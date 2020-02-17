@@ -16,7 +16,6 @@ end
 
 def prompt_user
   puts "Type 'h' to hit or 's' to stay"
-  get_user_input
 end
 
 def end_game(card_total)
@@ -31,7 +30,8 @@ def initial_round
 end
 
 def hit?(card_total)
-  input = prompt_user
+  prompt_user
+  input = get_user_input
   if input == 's'
     # don't deal
     total = card_total
@@ -49,7 +49,7 @@ end
 
 def invalid_command
   # code invalid_command here
-  puts
+  puts "Please enter a valid command"
 end
 
 #####################################################
@@ -59,8 +59,9 @@ end
 def runner
   # code runner here
   welcome
-  deal_card
-  deal_card
-
-
+  total = initial_round
+  while total <= 21
+    total = hit?(total)
+  end
+  end_game(total)
 end
